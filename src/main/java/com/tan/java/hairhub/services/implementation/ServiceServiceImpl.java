@@ -71,7 +71,7 @@ public class ServiceServiceImpl implements ServiceService {
     public void deleteService(int serviceId) throws Exception {
         Optional<com.tan.java.hairhub.entities.Service> checkServiceExist = this.serviceRepository.findById(serviceId);
         if(!checkServiceExist.isPresent()) {
-            throw new Exception("Delete service failed");
+            throw new Exception("Service does not exist");
         }
         this.serviceRepository.delete(checkServiceExist.get());
 

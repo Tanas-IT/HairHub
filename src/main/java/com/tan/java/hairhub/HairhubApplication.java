@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class HairhubApplication {
-    // Main
     public static void main(String[] args) {
-        //
+        // Main
         SpringApplication.run(HairhubApplication.class, args);
     }
 }
