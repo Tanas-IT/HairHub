@@ -1,26 +1,23 @@
 package com.tan.java.hairhub.dto.response;
 
-
-import com.tan.java.hairhub.entities.ProcessStep;
+import com.tan.java.hairhub.entities.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StepResponse {
+public class PaymentResponse {
 
-    private int stepId;
+    private int paymentId;
 
-    private String stepName;
+    private String paymentMethod;
 
-    private String imageURL;
+    private String status;
 
-//    private List<ProcessStep> processSteps;
+    private int orderId;
 }

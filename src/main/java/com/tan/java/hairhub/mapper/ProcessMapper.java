@@ -5,6 +5,7 @@ import com.tan.java.hairhub.dto.request.UpdateProcessDTO;
 import com.tan.java.hairhub.dto.response.ProcessResponse;
 import com.tan.java.hairhub.entities.Process;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 

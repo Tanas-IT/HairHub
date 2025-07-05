@@ -2,6 +2,8 @@ package com.tan.java.hairhub.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,7 +19,8 @@ public class Step {
 
     private String imageURL;
 
-    @OneToMany(mappedBy = "step")
+    @OneToMany(mappedBy = "step", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<ProcessStep> processSteps;
 
     public Step() {}

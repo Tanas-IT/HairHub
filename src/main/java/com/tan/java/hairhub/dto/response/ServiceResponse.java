@@ -1,5 +1,6 @@
 package com.tan.java.hairhub.dto.response;
 
+import com.tan.java.hairhub.dto.request.ImageResourceDTO;
 import com.tan.java.hairhub.entities.Combo;
 import com.tan.java.hairhub.entities.ImageResource;
 import lombok.AllArgsConstructor;
@@ -21,10 +22,9 @@ public class ServiceResponse {
 
     private String description;
 
-    private String timeOfSerivce;
-
-    private List<ImageResource> imageResources;
+    private List<ImageResourceDTO> imageResources;
 
     private List<Combo> combos;
+    private String typeOfService;
 
 }

@@ -2,6 +2,8 @@ package com.tan.java.hairhub.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -30,6 +32,7 @@ public class Combo {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "process_id")
+    @JsonManagedReference // Chiều cha
     private Process process;
 
     @OneToMany(mappedBy = "combo", fetch = FetchType.EAGER)
@@ -37,17 +40,26 @@ public class Combo {
 
     @ManyToOne
     @JoinColumn(name = "serviceId")
+    @JsonBackReference // Chiều con
     private Service service;
+
+    @Column(name = "timeOfService")
+    private String timeOfSerivce;
+
+    @Column(name = "price")
+    private double price;
 
     public Combo() {}
 
     public Combo(
             String comboName,
             String description,
+            double price,
             List<ImageResource> imageResources,
             Combo parentCombo,
             List<Combo> childCombos,
             Process process,
+            String timeOfSerivce,
             List<OrderDetail> orderDetails,
             Service service) {
         this.comboName = comboName;
@@ -58,6 +70,8 @@ public class Combo {
         this.process = process;
         this.orderDetails = orderDetails;
         this.service = service;
+        this.price = price;
+        this.timeOfSerivce = timeOfSerivce;
     }
 
     public Service getService() {
@@ -130,5 +144,21 @@ public class Combo {
 
     public void setProcess(Process process) {
         this.process = process;
+    }
+
+    public String getTimeOfSerivce() {
+        return timeOfSerivce;
+    }
+
+    public void setTimeOfSerivce(String timeOfSerivce) {
+        this.timeOfSerivce = timeOfSerivce;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

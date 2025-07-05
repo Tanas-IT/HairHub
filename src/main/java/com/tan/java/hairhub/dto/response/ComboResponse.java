@@ -1,5 +1,6 @@
 package com.tan.java.hairhub.dto.response;
 
+import com.tan.java.hairhub.dto.request.ImageResourceDTO;
 import com.tan.java.hairhub.entities.*;
 import com.tan.java.hairhub.entities.Process;
 import jakarta.persistence.*;
@@ -22,7 +23,7 @@ public class ComboResponse {
 
     private String description;
 
-    private List<ImageResource> imageResources;
+    private List<ImageResourceDTO> imageResources;
 
     private Combo parentCombo;
 
@@ -33,5 +34,6 @@ public class ComboResponse {
     private List<OrderDetail> orderDetails;
 
     private Service service;
-
+    private double price;
+    private String timeOfSerivce;
 }

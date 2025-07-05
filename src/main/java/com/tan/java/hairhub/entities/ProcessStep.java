@@ -1,5 +1,7 @@
 package com.tan.java.hairhub.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,12 +12,14 @@ public class ProcessStep {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int processStepId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "processId")
+    @JsonBackReference
     private Process process;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stepId")
+    @JsonManagedReference
     private Step step;
 
     @Column(name = "orderNumber")

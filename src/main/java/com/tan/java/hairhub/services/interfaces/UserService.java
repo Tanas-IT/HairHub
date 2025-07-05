@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tan.java.hairhub.dto.request.CreateUserDTO;
 import com.tan.java.hairhub.dto.request.UpdateUserDTO;
+import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import com.tan.java.hairhub.dto.response.UserDTO;
 
 public interface UserService {
@@ -11,8 +12,9 @@ public interface UserService {
     List<UserDTO> getAllUser(int pageIndex, int pageSize);
 
     UserDTO getUserById(int id);
+    UserDTO getUserByEmail(String email);
 
-    CreateUserDTO createUser(CreateUserDTO userDTO) throws Exception;
+    CreateUserResponse createUser(CreateUserDTO userDTO) throws Exception;
 
     UpdateUserDTO updateUser(UpdateUserDTO updateUserDTO);
 

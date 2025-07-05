@@ -2,6 +2,7 @@ package com.tan.java.hairhub.controllers;
 
 import java.util.List;
 
+import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,20 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<ApiResponse<UserDTO>> getUserById(@PathVariable String email) {
+        UserDTO userDTO = this.userService.getUserByEmail(email);
+        if (userDTO != null) {
+            ApiResponse<UserDTO> apiResponse = new ApiResponse<>();
+            apiResponse.setStatusCode(200);
+            apiResponse.setMessage("Get user By email success");
+            apiResponse.setData(userDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+
     @GetMapping("/myInfo")
     public ResponseEntity<ApiResponse<UserDTO>> getMyInfo() throws Exception {
         UserDTO userDTO = this.userService.getUserInfo();
@@ -66,15 +81,15 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<CreateUserDTO>> createUser(@RequestBody CreateUserDTO createUserDTO)
+    public ResponseEntity<ApiResponse<CreateUserResponse>> createUser(@RequestBody CreateUserDTO createUserDTO)
             throws Exception {
         log.info("Controller: In method createUser");
-        CreateUserDTO result = this.userService.createUser(createUserDTO);
-        ApiResponse<CreateUserDTO> apiResponse = new ApiResponse<>();
+        CreateUserResponse result = this.userService.createUser(createUserDTO);
+        ApiResponse<CreateUserResponse> apiResponse = new ApiResponse<>();
         if (result != null) {
             apiResponse.setStatusCode(201);
             apiResponse.setMessage("Create user success");
-            apiResponse.setData(createUserDTO);
+            apiResponse.setData(result);
             return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
         }
         apiResponse.setStatusCode(400);

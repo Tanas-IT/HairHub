@@ -9,20 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateComboDTO {
-
-    private int comboId;
-
-    private String comboName;
-
+public class ImageResourceDTO {
+    private int imageId;
+    private String imageURL;
     private String description;
-
-    private int parentComboId;
-
-    private int processId;
-
-    private int serviceId;
-    private double price;
-    private String timeOfSerivce;
-
 }

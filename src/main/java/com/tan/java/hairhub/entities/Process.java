@@ -2,6 +2,8 @@ package com.tan.java.hairhub.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,10 +19,12 @@ public class Process {
 
     private String description;
 
-    @OneToOne(mappedBy = "process")
+    @OneToOne(mappedBy = "process", fetch = FetchType.LAZY)
+    @JsonBackReference // Chiều con
     private Combo combo;
 
     @OneToMany(mappedBy = "process", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<ProcessStep> processSteps;
 
     @OneToMany(mappedBy = "process", fetch = FetchType.EAGER)

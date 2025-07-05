@@ -2,6 +2,7 @@ package com.tan.java.hairhub.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,13 +19,14 @@ public class Service {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "timeOfService")
-    private String timeOfSerivce;
+    @Column(name = "typeOfService")
+    private String typeOfService;
 
     @OneToMany(mappedBy = "service", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ImageResource> imageResources;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference // Chiều cha
     private List<Combo> combos;
 
     public Service() {}
@@ -32,14 +34,14 @@ public class Service {
     public Service(
             String title,
             String description,
-            String timeOfSerivce,
+            String typeOfService,
             List<ImageResource> imageResources,
             List<Combo> combos) {
         this.title = title;
         this.description = description;
-        this.timeOfSerivce = timeOfSerivce;
         this.imageResources = imageResources;
         this.combos = combos;
+        this.typeOfService = typeOfService;
     }
 
     public int getServiceId() {
@@ -66,14 +68,6 @@ public class Service {
         this.description = description;
     }
 
-    public String getTimeOfSerivce() {
-        return timeOfSerivce;
-    }
-
-    public void setTimeOfSerivce(String timeOfSerivce) {
-        this.timeOfSerivce = timeOfSerivce;
-    }
-
     public List<ImageResource> getImageResources() {
         return imageResources;
     }
@@ -88,5 +82,25 @@ public class Service {
 
     public void setCombos(List<Combo> combos) {
         this.combos = combos;
+    }
+
+    public String getTypeOfService() {
+        return typeOfService;
+    }
+
+    public void setTypeOfService(String typeOfService) {
+        this.typeOfService = typeOfService;
+    }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "serviceId=" + serviceId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", imageResources=" + imageResources +
+                ", combos=" + combos +
+                ", typeOfservices=" + typeOfService +
+                '}';
     }
 }

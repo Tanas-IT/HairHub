@@ -21,5 +21,5 @@ public class UpdateServiceDTO {
 
     private String description;
 
-    private String timeOfSerivce;
+    private String typeOfService;
 }

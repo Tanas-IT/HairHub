@@ -15,9 +15,9 @@ import lombok.Setter;
 public class ProcessStepResponse {
     private int processStepId;
 
-    private String processName;
+    private Process process;
 
-    private String stepName;
+    private Step step;
 
     private int orderNumber;
 

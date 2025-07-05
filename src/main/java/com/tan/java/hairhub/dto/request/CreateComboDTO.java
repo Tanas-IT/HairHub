@@ -25,5 +25,7 @@ public class CreateComboDTO {
     private int processId;
 
     private int serviceId;
+    private double price;
+    private String timeOfSerivce;
 
 }
