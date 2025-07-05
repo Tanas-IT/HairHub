@@ -2,8 +2,9 @@ package com.tan.java.hairhub.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "service")
@@ -94,13 +95,12 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
-                "serviceId=" + serviceId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", imageResources=" + imageResources +
-                ", combos=" + combos +
-                ", typeOfservices=" + typeOfService +
-                '}';
+        return "Service{" + "serviceId="
+                + serviceId + ", title='"
+                + title + '\'' + ", description='"
+                + description + '\'' + ", imageResources="
+                + imageResources + ", combos="
+                + combos + ", typeOfservices="
+                + typeOfService + '}';
     }
 }

@@ -1,11 +1,11 @@
 package com.tan.java.hairhub.repositories;
 
+import java.util.List;
 
-import com.tan.java.hairhub.entities.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import com.tan.java.hairhub.entities.Profile;
 
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 

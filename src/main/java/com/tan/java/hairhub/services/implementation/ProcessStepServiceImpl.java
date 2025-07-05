@@ -1,20 +1,19 @@
 package com.tan.java.hairhub.services.implementation;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tan.java.hairhub.dto.request.CreateProcessStepDTO;
 import com.tan.java.hairhub.dto.request.UpdateProcessStepDTO;
-import com.tan.java.hairhub.dto.response.ProcessResponse;
 import com.tan.java.hairhub.dto.response.ProcessStepResponse;
-import com.tan.java.hairhub.entities.Process;
 import com.tan.java.hairhub.entities.ProcessStep;
 import com.tan.java.hairhub.mapper.ProcessStepMapper;
 import com.tan.java.hairhub.repositories.ProcessStepRepository;
 import com.tan.java.hairhub.services.interfaces.ProcessStepService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProcessStepServiceImpl implements ProcessStepService {
@@ -32,7 +31,7 @@ public class ProcessStepServiceImpl implements ProcessStepService {
     public List<ProcessStepResponse> getAllProcessStep(int pageIndex, int pageSize) {
         List<ProcessStep> processSteps = this.processStepRepository.getAllProcessStep(pageIndex, pageSize);
         List<ProcessStepResponse> processStepResponses = new ArrayList<>();
-        if(processSteps.isEmpty()) {
+        if (processSteps.isEmpty()) {
             processSteps.forEach(processStep -> {
                 ProcessStepResponse processStepResponse = this.processStepMapper.toProcessStepResponse(processStep);
                 processStepResponses.add(processStepResponse);
@@ -44,8 +43,9 @@ public class ProcessStepServiceImpl implements ProcessStepService {
     @Override
     public ProcessStepResponse getProcessStepById(int processStepId) {
         Optional<ProcessStep> checkExistProcess = this.processStepRepository.findById(processStepId);
-        if(checkExistProcess.isPresent()) {
-            ProcessStepResponse processStepResponse = this.processStepMapper.toProcessStepResponse(checkExistProcess.get());
+        if (checkExistProcess.isPresent()) {
+            ProcessStepResponse processStepResponse =
+                    this.processStepMapper.toProcessStepResponse(checkExistProcess.get());
             return processStepResponse;
         }
         return null;
@@ -54,7 +54,7 @@ public class ProcessStepServiceImpl implements ProcessStepService {
     @Override
     public ProcessStepResponse createProcessStep(CreateProcessStepDTO createProcessStepDTO) {
         ProcessStep processStep = this.processStepMapper.createProcess(createProcessStepDTO);
-        if(processStep != null) {
+        if (processStep != null) {
             ProcessStep result = this.processStepRepository.save(processStep);
             ProcessStepResponse processResponse = this.processStepMapper.toProcessStepResponse(result);
             return processResponse;
@@ -64,8 +64,9 @@ public class ProcessStepServiceImpl implements ProcessStepService {
 
     @Override
     public ProcessStep updateProcessStep(UpdateProcessStepDTO updateProcessStepDTO) throws Exception {
-        Optional<ProcessStep> checkExistProcess = this.processStepRepository.findById(updateProcessStepDTO.getProcessStepId());
-        if(!checkExistProcess.isPresent()) {
+        Optional<ProcessStep> checkExistProcess =
+                this.processStepRepository.findById(updateProcessStepDTO.getProcessStepId());
+        if (!checkExistProcess.isPresent()) {
             throw new Exception("Process Step does not exist");
         }
         ProcessStep updateProcess = this.processStepMapper.updateProcess(updateProcessStepDTO, checkExistProcess.get());
@@ -76,7 +77,7 @@ public class ProcessStepServiceImpl implements ProcessStepService {
     @Override
     public void deleteProcessStep(int processStepId) throws Exception {
         Optional<ProcessStep> checkExistProcess = this.processStepRepository.findById(processStepId);
-        if(!checkExistProcess.isPresent()) {
+        if (!checkExistProcess.isPresent()) {
             throw new Exception("Process Step does not exist");
         }
         this.processStepRepository.delete(checkExistProcess.get());

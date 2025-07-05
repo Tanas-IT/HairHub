@@ -1,14 +1,13 @@
 package com.tan.java.hairhub.dto.request;
 
-import com.tan.java.hairhub.entities.*;
-import com.tan.java.hairhub.entities.Process;
 import jakarta.persistence.*;
+
+import com.tan.java.hairhub.entities.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -27,5 +26,4 @@ public class CreateComboDTO {
     private int serviceId;
     private double price;
     private String timeOfSerivce;
-
 }

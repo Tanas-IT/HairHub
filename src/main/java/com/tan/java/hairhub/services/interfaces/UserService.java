@@ -12,6 +12,7 @@ public interface UserService {
     List<UserDTO> getAllUser(int pageIndex, int pageSize);
 
     UserDTO getUserById(int id);
+
     UserDTO getUserByEmail(String email);
 
     CreateUserResponse createUser(CreateUserDTO userDTO) throws Exception;

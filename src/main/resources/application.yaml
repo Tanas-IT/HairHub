@@ -2,10 +2,10 @@ spring:
   application:
     name: hairhub
   datasource:
-    url: jdbc:mysql://localhost:3306/hair_hub
-    username: root
-    password: 12345
-    driverClassName:  com.mysql.cj.jdbc.Driver
+    url:   jdbc:mysql://sql12.freesqldatabase.com:3306/sql12788423
+    username: sql12788423
+    password: CNzLQMtLYf
+    # driverClassName:  com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update

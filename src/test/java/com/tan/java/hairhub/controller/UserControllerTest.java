@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tan.java.hairhub.dto.request.CreateUserDTO;
+import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import com.tan.java.hairhub.services.interfaces.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class UserControllerTest {
 
     private CreateUserDTO userRequest;
 
-    private CreateUserDTO userResponse;
+    private CreateUserResponse userResponse;
 
     private LocalDate dob;
 
@@ -53,7 +54,7 @@ public class UserControllerTest {
                 .roleId(1)
                 .build();
 
-        userResponse = CreateUserDTO.builder()
+        userResponse = CreateUserResponse.builder()
                 .email("john@gmail.com")
                 .fullName("David John")
                 .password("123456")

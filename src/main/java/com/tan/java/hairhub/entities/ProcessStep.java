@@ -1,8 +1,9 @@
 package com.tan.java.hairhub.entities;
 
+import jakarta.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "processStep")

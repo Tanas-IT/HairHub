@@ -99,5 +99,4 @@ public class ImageResource {
     public void setStore(Store store) {
         this.store = store;
     }
-
 }

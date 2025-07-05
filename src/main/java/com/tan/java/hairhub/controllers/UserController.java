@@ -2,15 +2,14 @@ package com.tan.java.hairhub.controllers;
 
 import java.util.List;
 
-import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.tan.java.hairhub.dto.request.CreateUserDTO;
 import com.tan.java.hairhub.dto.request.UpdateUserDTO;
 import com.tan.java.hairhub.dto.response.ApiResponse;
+import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import com.tan.java.hairhub.dto.response.UserDTO;
 import com.tan.java.hairhub.services.interfaces.UserService;
 
@@ -65,7 +64,6 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
 
     @GetMapping("/myInfo")
     public ResponseEntity<ApiResponse<UserDTO>> getMyInfo() throws Exception {

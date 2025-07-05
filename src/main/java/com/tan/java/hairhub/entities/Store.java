@@ -45,7 +45,18 @@ public class Store {
 
     public Store() {}
 
-    public Store(int storeId, String storeName, String ward, String district, String province, String description, String address, String logoURL, List<ImageResource> imageResources, String storePhoneNumber, User user) {
+    public Store(
+            int storeId,
+            String storeName,
+            String ward,
+            String district,
+            String province,
+            String description,
+            String address,
+            String logoURL,
+            List<ImageResource> imageResources,
+            String storePhoneNumber,
+            User user) {
         this.storeId = storeId;
         this.storeName = storeName;
         this.ward = ward;
@@ -146,6 +157,4 @@ public class Store {
     public void setStorePhoneNumber(String storePhoneNumber) {
         this.storePhoneNumber = storePhoneNumber;
     }
-
-
 }

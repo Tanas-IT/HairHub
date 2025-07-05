@@ -1,12 +1,13 @@
 package com.tan.java.hairhub.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
 import com.tan.java.hairhub.dto.request.CreateProfileDTO;
 import com.tan.java.hairhub.dto.request.UpdateProfileDTO;
 import com.tan.java.hairhub.dto.response.ProfileResponse;
 import com.tan.java.hairhub.entities.Profile;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ProfileMapper {

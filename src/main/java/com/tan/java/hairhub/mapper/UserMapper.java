@@ -1,8 +1,5 @@
 package com.tan.java.hairhub.mapper;
 
-import com.tan.java.hairhub.dto.request.CreateStoreDTO;
-import com.tan.java.hairhub.dto.response.CreateUserResponse;
-import com.tan.java.hairhub.entities.Store;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -10,6 +7,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.tan.java.hairhub.dto.request.CreateUserDTO;
 import com.tan.java.hairhub.dto.request.UpdateUserDTO;
+import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import com.tan.java.hairhub.dto.response.UserDTO;
 import com.tan.java.hairhub.entities.Profile;
 import com.tan.java.hairhub.entities.User;
@@ -35,7 +33,5 @@ public interface UserMapper {
 
     void updateProfileFromDRO(UpdateUserDTO userDTO, @MappingTarget Profile profile);
 
-    CreateUserResponse createUserResponse (CreateUserDTO dto);
-
-
+    CreateUserResponse createUserResponse(CreateUserDTO dto);
 }

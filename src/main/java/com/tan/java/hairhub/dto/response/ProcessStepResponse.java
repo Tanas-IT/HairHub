@@ -2,11 +2,11 @@ package com.tan.java.hairhub.dto.response;
 
 import com.tan.java.hairhub.entities.Process;
 import com.tan.java.hairhub.entities.Step;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter
@@ -20,5 +20,4 @@ public class ProcessStepResponse {
     private Step step;
 
     private int orderNumber;
-
 }

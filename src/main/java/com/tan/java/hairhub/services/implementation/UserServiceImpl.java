@@ -6,34 +6,31 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-import com.nimbusds.jose.*;
-import com.nimbusds.jose.crypto.MACSigner;
-import com.nimbusds.jwt.JWTClaimsSet;
-import com.tan.java.hairhub.dto.response.CreateUserResponse;
-import com.tan.java.hairhub.dto.response.TokenResponse;
-import com.tan.java.hairhub.entities.RefreshToken;
-import com.tan.java.hairhub.repositories.RefreshTokenRepository;
-import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.nimbusds.jose.*;
+import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jwt.JWTClaimsSet;
 import com.tan.java.hairhub.dto.request.CreateUserDTO;
 import com.tan.java.hairhub.dto.request.UpdateUserDTO;
+import com.tan.java.hairhub.dto.response.CreateUserResponse;
 import com.tan.java.hairhub.dto.response.UserDTO;
 import com.tan.java.hairhub.entities.Profile;
+import com.tan.java.hairhub.entities.RefreshToken;
 import com.tan.java.hairhub.entities.Role;
 import com.tan.java.hairhub.entities.User;
 import com.tan.java.hairhub.mapper.UserMapper;
+import com.tan.java.hairhub.repositories.RefreshTokenRepository;
 import com.tan.java.hairhub.repositories.RoleRepository;
 import com.tan.java.hairhub.repositories.UserRepository;
 import com.tan.java.hairhub.services.interfaces.UserService;
 import com.tan.java.hairhub.util.ConfigSystem;
 
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -44,6 +41,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     private ConfigSystem configSystem;
     private RefreshTokenRepository refreshTokenRepository;
+
     @Autowired
     private UserMapper userMapper;
 
@@ -60,14 +58,18 @@ public class UserServiceImpl implements UserService {
     private long REFRESHABLE_DURATION;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ConfigSystem bCryptEncode, RoleRepository roleRepository, RefreshTokenRepository refreshTokenRepository) {
+    public UserServiceImpl(
+            UserRepository userRepository,
+            ConfigSystem bCryptEncode,
+            RoleRepository roleRepository,
+            RefreshTokenRepository refreshTokenRepository) {
         this.userRepository = userRepository;
         this.bCryptEncode = bCryptEncode;
         this.roleRepository = roleRepository;
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
+    //    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public List<UserDTO> getAllUser(int pageIndex, int pageSize) {
         log.info("In method getAllUser");
@@ -94,7 +96,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @PostAuthorize("returnObject.email == authentication.name")
+    //    @PostAuthorize("returnObject.email == authentication.name")
     // returnObject là kết quả của hàm trả về, authentication là object lưu thông tin của token đã decode. Khi token đã
     // decode và validate hợp lệ
     // thì sẽ lưu trong SecurityContextHolder và authentication là đối tượng được khởi tạo từ SecurityContextHolder,
@@ -126,7 +128,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @PostAuthorize("hasRole('ADMIN')")
+    //    @PostAuthorize("hasRole('ADMIN')")
     public CreateUserResponse createUser(CreateUserDTO userDTO) throws Exception {
         log.info("Service: In method createUser");
         User user = userMapper.toUser(userDTO);
@@ -142,20 +144,20 @@ public class UserServiceImpl implements UserService {
             throw new Exception("User existed");
         }
         try {
-                String accessToken = generateAccessToken(user);
-                String refreshTokenGenerate = generateRefreshToken(user);
+            String accessToken = generateAccessToken(user);
+            String refreshTokenGenerate = generateRefreshToken(user);
 
-                RefreshToken refreshToken = new RefreshToken();
-                refreshToken.setRefreshTokenValue(refreshTokenGenerate);
-                refreshToken.setUser(user);
-                refreshToken.setCreateDate(LocalDate.now());
-                refreshToken.setExpiredDate(LocalDateTime.now().plusMonths(1));
-                refreshToken.setUsed(false);
-                refreshToken.setRevoked(true);
-                this.refreshTokenRepository.save(refreshToken);
-                createUserResponse.setAccessToken(accessToken);
-                createUserResponse.setRefreshToken(refreshTokenGenerate);
-                createUserResponse.setActive(true);
+            RefreshToken refreshToken = new RefreshToken();
+            refreshToken.setRefreshTokenValue(refreshTokenGenerate);
+            refreshToken.setUser(user);
+            refreshToken.setCreateDate(LocalDate.now());
+            refreshToken.setExpiredDate(LocalDateTime.now().plusMonths(1));
+            refreshToken.setUsed(false);
+            refreshToken.setRevoked(true);
+            this.refreshTokenRepository.save(refreshToken);
+            createUserResponse.setAccessToken(accessToken);
+            createUserResponse.setRefreshToken(refreshTokenGenerate);
+            createUserResponse.setActive(true);
         } catch (JOSEException e) {
             throw new RuntimeException(e);
         }
