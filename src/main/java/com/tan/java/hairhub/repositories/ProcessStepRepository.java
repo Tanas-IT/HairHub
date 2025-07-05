@@ -1,10 +1,11 @@
 package com.tan.java.hairhub.repositories;
-import com.tan.java.hairhub.entities.ProcessStep;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.tan.java.hairhub.entities.ProcessStep;
 
 public interface ProcessStepRepository extends JpaRepository<ProcessStep, Integer> {
 

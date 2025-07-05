@@ -1,10 +1,11 @@
 package com.tan.java.hairhub.repositories;
 
-import com.tan.java.hairhub.entities.Step;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import com.tan.java.hairhub.entities.Step;
 
 public interface StepRepository extends JpaRepository<Step, Integer> {
 

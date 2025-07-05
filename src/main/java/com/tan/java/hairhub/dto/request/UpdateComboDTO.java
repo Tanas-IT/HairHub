@@ -24,5 +24,4 @@ public class UpdateComboDTO {
     private int serviceId;
     private double price;
     private String timeOfSerivce;
-
 }

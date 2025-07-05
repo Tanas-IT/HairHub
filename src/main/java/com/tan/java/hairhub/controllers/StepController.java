@@ -1,34 +1,36 @@
 package com.tan.java.hairhub.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.tan.java.hairhub.dto.request.CreateStepDTO;
 import com.tan.java.hairhub.dto.request.UpdateStepDTO;
 import com.tan.java.hairhub.dto.response.ApiResponse;
 import com.tan.java.hairhub.dto.response.StepResponse;
 import com.tan.java.hairhub.entities.Step;
 import com.tan.java.hairhub.services.interfaces.StepService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/step")
 public class StepController {
-    
+
     private StepService stepService;
-    
+
     @Autowired
     public StepController(StepService stepService) {
         this.stepService = stepService;
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<ApiResponse<List<StepResponse>>> getAllStep(@RequestParam int pageIndex, @RequestParam int pageSize) {
+    public ResponseEntity<ApiResponse<List<StepResponse>>> getAllStep(
+            @RequestParam int pageIndex, @RequestParam int pageSize) {
         List<StepResponse> listStepResponse = this.stepService.getAllStep(pageIndex, pageSize);
         ApiResponse<List<StepResponse>> apiResponse = new ApiResponse<>();
-        if(!listStepResponse.isEmpty()) {
+        if (!listStepResponse.isEmpty()) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Get all dtep success");
             apiResponse.setData(listStepResponse);
@@ -41,12 +43,11 @@ public class StepController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<StepResponse>> getStepById(@PathVariable int id) {
         StepResponse StepResponse = this.stepService.getStepById(id);
         ApiResponse<StepResponse> apiResponse = new ApiResponse<>();
-        if(StepResponse != null) {
+        if (StepResponse != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Get step by id success");
             apiResponse.setData(StepResponse);
@@ -64,7 +65,7 @@ public class StepController {
     public ResponseEntity<ApiResponse<StepResponse>> createStep(@RequestBody CreateStepDTO createStepDTO) {
         StepResponse step = this.stepService.createStep(createStepDTO);
         ApiResponse<StepResponse> apiResponse = new ApiResponse<>();
-        if(step != null) {
+        if (step != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Create step success");
             apiResponse.setData(step);
@@ -78,10 +79,11 @@ public class StepController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ApiResponse<com.tan.java.hairhub.entities.Step>> updateStep(@RequestBody UpdateStepDTO updateStepDTO) throws Exception {
+    public ResponseEntity<ApiResponse<com.tan.java.hairhub.entities.Step>> updateStep(
+            @RequestBody UpdateStepDTO updateStepDTO) throws Exception {
         var stepUpdate = this.stepService.updateStep(updateStepDTO);
         ApiResponse<Step> apiResponse = new ApiResponse<>();
-        if(stepUpdate != null) {
+        if (stepUpdate != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Update step success");
             apiResponse.setData(stepUpdate);

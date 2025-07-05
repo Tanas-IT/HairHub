@@ -1,34 +1,35 @@
 package com.tan.java.hairhub.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.tan.java.hairhub.dto.request.CreateProfileDTO;
 import com.tan.java.hairhub.dto.request.UpdateProfileDTO;
 import com.tan.java.hairhub.dto.response.ApiResponse;
 import com.tan.java.hairhub.dto.response.ProfileResponse;
 import com.tan.java.hairhub.entities.Profile;
 import com.tan.java.hairhub.services.interfaces.ProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/profile")
 public class ProfileController {
     private ProfileService profileService;
-    
-    
+
     @Autowired
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<ApiResponse<List<ProfileResponse>>> getAllProfile(@RequestParam int pageIndex, @RequestParam int pageSize) {
+    public ResponseEntity<ApiResponse<List<ProfileResponse>>> getAllProfile(
+            @RequestParam int pageIndex, @RequestParam int pageSize) {
         List<ProfileResponse> listProfileResponse = this.profileService.getAllProfile(pageIndex, pageSize);
         ApiResponse<List<ProfileResponse>> apiResponse = new ApiResponse<>();
-        if(!listProfileResponse.isEmpty()) {
+        if (!listProfileResponse.isEmpty()) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Get all profile success");
             apiResponse.setData(listProfileResponse);
@@ -41,12 +42,11 @@ public class ProfileController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<ProfileResponse>> getProfileById(@PathVariable int id) {
         ProfileResponse profileResponse = this.profileService.getProfileById(id);
         ApiResponse<ProfileResponse> apiResponse = new ApiResponse<>();
-        if(profileResponse != null) {
+        if (profileResponse != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Get profile by id success");
             apiResponse.setData(profileResponse);
@@ -64,7 +64,7 @@ public class ProfileController {
     public ResponseEntity<ApiResponse<ProfileResponse>> createProfile(@RequestBody CreateProfileDTO createProfileDTO) {
         ProfileResponse profile = this.profileService.createProfile(createProfileDTO);
         ApiResponse<ProfileResponse> apiResponse = new ApiResponse<>();
-        if(profile != null) {
+        if (profile != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Create profile success");
             apiResponse.setData(profile);
@@ -78,10 +78,11 @@ public class ProfileController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ApiResponse<com.tan.java.hairhub.entities.Profile>> updateProfile(@RequestBody UpdateProfileDTO updateProfileDTO) throws Exception {
+    public ResponseEntity<ApiResponse<com.tan.java.hairhub.entities.Profile>> updateProfile(
+            @RequestBody UpdateProfileDTO updateProfileDTO) throws Exception {
         var ProfileUpdate = this.profileService.updateProfile(updateProfileDTO);
         ApiResponse<Profile> apiResponse = new ApiResponse<>();
-        if(ProfileUpdate != null) {
+        if (ProfileUpdate != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Update profile success");
             apiResponse.setData(ProfileUpdate);

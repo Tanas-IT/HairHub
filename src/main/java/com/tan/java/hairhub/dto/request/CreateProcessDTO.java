@@ -1,14 +1,9 @@
 package com.tan.java.hairhub.dto.request;
 
-import com.tan.java.hairhub.entities.Combo;
-import com.tan.java.hairhub.entities.ImageResource;
-import com.tan.java.hairhub.entities.ProcessStep;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

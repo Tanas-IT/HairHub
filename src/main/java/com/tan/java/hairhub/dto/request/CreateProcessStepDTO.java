@@ -1,6 +1,5 @@
 package com.tan.java.hairhub.dto.request;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +14,4 @@ public class CreateProcessStepDTO {
     private int processStepId;
 
     private int orderNumber;
-
 }

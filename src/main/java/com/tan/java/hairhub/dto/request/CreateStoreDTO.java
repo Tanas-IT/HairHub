@@ -1,13 +1,11 @@
 package com.tan.java.hairhub.dto.request;
 
-import com.tan.java.hairhub.entities.ImageResource;
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Setter
 @Getter
@@ -32,5 +30,4 @@ public class CreateStoreDTO {
     private String storePhoneNumber;
 
     private int userId;
-
 }

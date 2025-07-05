@@ -1,5 +1,11 @@
 package com.tan.java.hairhub.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.tan.java.hairhub.dto.request.CreateOrderDTO;
 import com.tan.java.hairhub.dto.request.UpdateOrderDTO;
@@ -7,29 +13,24 @@ import com.tan.java.hairhub.dto.response.ApiResponse;
 import com.tan.java.hairhub.dto.response.OrderResponse;
 import com.tan.java.hairhub.entities.Order;
 import com.tan.java.hairhub.services.interfaces.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
-    
+
     private OrderService orderService;
-    
+
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<ApiResponse<List<OrderResponse>>> getAllOrder(@RequestParam int pageIndex, @RequestParam int pageSize) {
+    public ResponseEntity<ApiResponse<List<OrderResponse>>> getAllOrder(
+            @RequestParam int pageIndex, @RequestParam int pageSize) {
         List<OrderResponse> listOrderResponse = this.orderService.getAllOrder(pageIndex, pageSize);
         ApiResponse<List<OrderResponse>> apiResponse = new ApiResponse<>();
-        if(!listOrderResponse.isEmpty()) {
+        if (!listOrderResponse.isEmpty()) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Get all order success");
             apiResponse.setData(listOrderResponse);
@@ -42,12 +43,11 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<OrderResponse>> getOrderById(@PathVariable int id) {
         OrderResponse orderResponse = this.orderService.getOrderById(id);
         ApiResponse<OrderResponse> apiResponse = new ApiResponse<>();
-        if(orderResponse != null) {
+        if (orderResponse != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Get order by id success");
             apiResponse.setData(orderResponse);
@@ -65,7 +65,7 @@ public class OrderController {
     public ResponseEntity<ApiResponse<OrderResponse>> createOrder(@RequestBody CreateOrderDTO createOrderDTO) {
         OrderResponse order = this.orderService.createOrder(createOrderDTO);
         ApiResponse<OrderResponse> apiResponse = new ApiResponse<>();
-        if(order != null) {
+        if (order != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Create order success");
             apiResponse.setData(order);
@@ -79,10 +79,11 @@ public class OrderController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ApiResponse<com.tan.java.hairhub.entities.Order>> updateOrder(@RequestBody UpdateOrderDTO updateOrderDTO) throws Exception {
+    public ResponseEntity<ApiResponse<com.tan.java.hairhub.entities.Order>> updateOrder(
+            @RequestBody UpdateOrderDTO updateOrderDTO) throws Exception {
         var orderUpdate = this.orderService.updateOrder(updateOrderDTO);
         ApiResponse<Order> apiResponse = new ApiResponse<>();
-        if(orderUpdate != null) {
+        if (orderUpdate != null) {
             apiResponse.setStatusCode(HttpStatus.OK.value());
             apiResponse.setMessage("Update order success");
             apiResponse.setData(orderUpdate);

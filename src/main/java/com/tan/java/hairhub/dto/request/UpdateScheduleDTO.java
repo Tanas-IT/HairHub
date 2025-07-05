@@ -1,15 +1,13 @@
 package com.tan.java.hairhub.dto.request;
 
-import com.tan.java.hairhub.entities.Combo;
-import com.tan.java.hairhub.entities.WorkLog;
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -27,5 +25,5 @@ public class UpdateScheduleDTO {
 
     private LocalDate endDate;
 
-   private int comboId;
+    private int comboId;
 }
