@@ -115,4 +115,11 @@ public class Profile {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public void addUser(User user) {
+        if (this.user == null) {
+            this.user = new User();
+        }
+        this.user = user;
+    }
 }
