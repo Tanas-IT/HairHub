@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -13,9 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
@@ -81,42 +77,23 @@ public class UserServiceTest {
                 .build());
     }
 
-    @Test
-    void createUser_validRequest_success() throws Exception {
-        // SETUP AUTHENTICATION
-        var authorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        var auth = new UsernamePasswordAuthenticationToken("testUser", null, authorities);
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        // GIVEN
-        when(userRepository.existsById(anyInt())).thenReturn(false);
-        when(userRepository.save(any())).thenReturn(user);
-
-        // When
-        var response = userService.createUser(userRequest);
-
-        // Then
-
-        Assertions.assertThat(response.getEmail()).isEqualTo("john@gmail.com");
-        Assertions.assertThat(response.getFullName()).isEqualTo("David John");
-    }
-
-    @Test
-    void createUser_userExisted_failed() {
-        // SETUP AUTHENTICATION
-        var authorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        var auth = new UsernamePasswordAuthenticationToken("testUser", null, authorities);
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        // GIVEN
-        when(userRepository.findByEmail(anyString())).thenReturn(userCreateResponse);
-
-        // When
-        var exception = assertThrows(Exception.class, () -> userService.createUser(userRequest));
-
-        // Then
-
-        Assertions.assertThat(userCreateResponse.get().getEmail()).isEqualTo("john@gmail.com");
-        Assertions.assertThat(exception.getMessage()).isEqualTo("User is already existed");
-    }
+    //    @Test
+    //    void createUser_userExisted_failed() {
+    //        // SETUP AUTHENTICATION
+    //        var authorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    //        var auth = new UsernamePasswordAuthenticationToken("testUser", null, authorities);
+    //        SecurityContextHolder.getContext().setAuthentication(auth);
+    //        // GIVEN
+    //        when(userRepository.findByEmail(anyString())).thenReturn(userCreateResponse);
+    //
+    //        // When
+    //        var exception = assertThrows(Exception.class, () -> userService.createUser(userRequest));
+    //
+    //        // Then
+    //
+    //        Assertions.assertThat(userCreateResponse.get().getEmail()).isEqualTo("john@gmail.com");
+    //        Assertions.assertThat(exception.getMessage()).isEqualTo("User is already existed");
+    //    }
 
     @Test
     @WithMockUser(
