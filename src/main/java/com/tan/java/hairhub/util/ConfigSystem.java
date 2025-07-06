@@ -83,7 +83,7 @@ public class ConfigSystem {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000")); // hoặc "*" nếu không cần restrict
+        config.setAllowedOrigins(List.of("http://localhost:3000", "https://hair-hub-web.vercel.app/")); // hoặc "*" nếu không cần restrict
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true); // nếu dùng cookie/token trong header
